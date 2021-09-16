@@ -7,8 +7,9 @@
 * Hystrix Stream: http://localhost:9191/actuator/hystrix.stream
 
 Order to-start services:
-  * service-registry
-  * cloud-config-server
-  * cloud-gateway
-  * hystrix-dashboard
-  * user/department services
+
+* service-registry
+* cloud-config-server
+* cloud-gateway
+* hystrix-dashboard
+* user/department services
