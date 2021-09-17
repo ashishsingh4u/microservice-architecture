@@ -1,3 +1,11 @@
+info:
+  application:
+    name: CONFIG-SERVER
+    description: Configuration Server
+    author:
+      name: Ashish Singh
+      bio: Geek
+
 server:
   port: 9296
 
@@ -12,3 +20,19 @@ spring:
           clone-on-start: true
   profiles:
     active: native
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: env, health, metrics, beans, info, *
+  endpoint:
+    metrics:
+      enabled: true
+    health:
+      show-details: always
+    beans:
+      enabled: true
+  info:
+    git:
+      mode: full

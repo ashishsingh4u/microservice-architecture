@@ -1,3 +1,11 @@
+info:
+  application:
+    name: HYSTRIX-DASHBOARD
+    description: Hystrix Dashboard
+    author:
+      name: Ashish Singh
+      bio: Geek
+
 server:
   port: 9295
 
@@ -8,3 +16,19 @@ spring:
 hystrix:
   dashboard:
     proxy-stream-allow-list: "*"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: env, health, metrics, beans, info, *
+  endpoint:
+    metrics:
+      enabled: true
+    health:
+      show-details: always
+    beans:
+      enabled: true
+  info:
+    git:
+      mode: full

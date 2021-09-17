@@ -1,3 +1,11 @@
+info:
+  application:
+    name: DEPARTMENT-SERVICE
+    description: Department Service
+    author:
+      name: Ashish Singh
+      bio: Geek
+
 server:
   port: 9001
 
@@ -6,3 +14,19 @@ spring:
     name: DEPARTMENT-SERVICE
   config:
     import: "optional:configserver:"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: env, health, metrics, beans, info, *
+  endpoint:
+    metrics:
+      enabled: true
+    health:
+      show-details: always
+    beans:
+      enabled: true
+  info:
+    git:
+      mode: full

@@ -1,3 +1,11 @@
+info:
+  application:
+    name: API-GATEWAY
+    description: API Gateway
+    author:
+      name: Ashish Singh
+      bio: Geek
+
 server:
   port: 9191
 
@@ -40,4 +48,16 @@ management:
   endpoints:
     web:
       exposure:
-        include: hystrix.stream
+        include: env, health, metrics, beans, info, *
+  endpoint:
+    metrics:
+      enabled: true
+    health:
+      show-details: always
+    beans:
+      enabled: true
+  info:
+    git:
+      mode: full
+
+
