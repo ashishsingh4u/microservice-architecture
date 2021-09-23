@@ -3,9 +3,9 @@ package com.techienotes.user.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techienotes.user.entity.User;
+import com.techienotes.user.model.Department;
 import com.techienotes.user.repository.UserRepository;
 import com.techienotes.user.service.UserService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,6 +15,7 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.client.RestTemplate;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
@@ -22,7 +23,7 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
+@SpringBootTest({"server.port:0", "eureka.client.enabled:false"})
 @AutoConfigureMockMvc
 class UserControllerTest {
     @SpyBean
@@ -33,6 +34,9 @@ class UserControllerTest {
 
     @MockBean
     UserRepository userRepository;
+
+    @MockBean
+    RestTemplate restTemplate;
 
     @Autowired
     MockMvc mockMvc;
@@ -51,8 +55,12 @@ class UserControllerTest {
         verify(userRepository, times(1)).save(user);
     }
 
-    @Disabled("Failing with Load-balancer dependency as department service is not up during test")
+    //    @Disabled("Failing with Load-balancer dependency as department service is not up during test")
+    @Test
     void givenUsers_whenFindUsers_thenStatus200() throws Exception {
+        Department department = new Department(1L, "ADMIN", "TTC", "AD-100");
+        doReturn(department).when(restTemplate).getForObject(String.format("http://DEPARTMENT-SERVICE/departments/%s",
+                department.getDepartmentId()), Department.class);
         User user = new User(1L, "Test", "Method", "Test@Method.com", "1");
         doReturn(user).when(userRepository).findByUserId(1L);
         mockMvc.perform(MockMvcRequestBuilders.get("/users/1")
