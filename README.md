@@ -13,3 +13,7 @@ Order to-start services:
 * cloud-gateway
 * hystrix-dashboard
 * user/department services
+
+## Spring Boot Testing
+
+[Reference](https://www.baeldung.com/spring-boot-testing)
