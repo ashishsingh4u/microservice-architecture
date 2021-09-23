@@ -26,16 +26,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class UserControllerTest {
     @SpyBean
-    private UserController userController;
+    UserController userController;
 
     @SpyBean
-    private UserService userService;
+    UserService userService;
 
     @MockBean
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @Autowired
-    private MockMvc mockMvc;
+    MockMvc mockMvc;
 
     @Test
     void testUserControllerSave() throws Exception {

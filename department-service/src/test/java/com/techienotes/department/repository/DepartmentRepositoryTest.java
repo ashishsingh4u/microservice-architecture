@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class DepartmentRepositoryTest {
 
     @Autowired
-    private DepartmentRepository departmentRepository;
+    DepartmentRepository departmentRepository;
 
     @BeforeEach
     void setUp() {

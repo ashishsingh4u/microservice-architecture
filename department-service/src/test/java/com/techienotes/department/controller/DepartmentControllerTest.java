@@ -29,16 +29,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class DepartmentControllerTest {
 
     @SpyBean
-    private DepartmentController departmentController;
+    DepartmentController departmentController;
 
     @SpyBean
-    private DepartmentService departmentService;
+    DepartmentService departmentService;
 
     @MockBean
-    private DepartmentRepository departmentRepository;
+    DepartmentRepository departmentRepository;
 
     @Autowired
-    private MockMvc mockMvc;
+    MockMvc mockMvc;
 
     static String asJson(Object object) throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(object);
